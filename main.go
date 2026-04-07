@@ -1,6 +1,7 @@
 package main
 
 import (
+	"example.com/rest-api/db"
 	"example.com/rest-api/models"
 	"github.com/gin-gonic/gin"
 
@@ -8,6 +9,7 @@ import (
 )
 
 func main() {
+	db.InitDB()
 	server := gin.Default()
 	server.GET("/events", getEvents) //Get,Post,Put,Delete,Patch,Head,Options,Any
 	server.POST("/events", createEvent)
