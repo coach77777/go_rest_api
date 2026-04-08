@@ -26,7 +26,7 @@ func VerifyToken(token string) error {
 			return nil, errors.New("Invalid Token Signature")
 		}
 
-		return secretKey, nil
+		return []byte(secretKey), nil
 	})
 	if err != nil {
 		return errors.New("Could not parse token")
