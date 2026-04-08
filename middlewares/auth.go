@@ -1,7 +1,7 @@
 package middlewares
 
 import (
-	"context"
+	
 	"net/http"
 	"example.com/rest-api/utils"
 
@@ -28,6 +28,8 @@ userID, err := utils.VerifyToken(token)
 		})
 		return
 	}
+
+	context.Set("userID", userID)
 
 	context.Next()
 }
