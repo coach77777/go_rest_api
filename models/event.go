@@ -4,20 +4,16 @@ import (
 	"time"
 
 	"example.com/rest-api/db"
-	
 )
 
-
 type Event struct {
-	ID          int64       `json:"id"`
+	ID          int64     `json:"id"`
 	Name        string    `json:"name" binding:"required"`
 	Description string    `json:"description" binding:"required"`
 	Location    string    `json:"location" binding:"required"`
 	DateTime    time.Time `json:"dateTime" binding:"required"`
 	UserID      int       `json:"userId"`
 }
-
-
 
 func (e Event) Save() error {
 
@@ -34,7 +30,7 @@ func (e Event) Save() error {
 	if err != nil {
 		return err
 	}
-	id,err := result.LastInsertId()
+	id, err := result.LastInsertId()
 	e.ID = id
 
 	return err
@@ -44,7 +40,7 @@ func GetAllEvents() ([]Event, error) {
 	query := `SELECT * FROM events`
 	rows, err := db.DB.Query(query)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 	defer rows.Close()
 
@@ -73,4 +69,28 @@ func GetEventByID(id int64) (*Event, error) {
 	}
 
 	return &event, nil
+}
+
+func (event Event) Update() error {
+	query :=
+		`UPDATE events
+
+	SET name = ?,
+	 description = ?, 
+	 location = ?, 
+	 dateTime = ?
+	  WHERE id = ?`
+
+	stmt, err := db.DB.Prepare(query)
+	if err != nil {
+		return err
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(event.Name, event.Description, event.Location, event.DateTime, event.ID)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
