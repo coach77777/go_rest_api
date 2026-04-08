@@ -27,10 +27,8 @@ func InitDB() {
  `CREATE TABLE IF NOT EXISTS users (
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        email TEXT NOT NULL UNIQUE,
-	   password TEXT NOT NULL,
-       location TEXT NOT NULL,
-       dateTime DATETIME NOT NULL,
-       user_id INTEGER 
+	   password TEXT NOT NULL
+    
    )
    `
 
