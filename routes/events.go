@@ -1,10 +1,11 @@
 package routes
 
 import (
-	"example.com/rest-api/models"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
+
+	"example.com/rest-api/models"
+	"github.com/gin-gonic/gin"
 )
 
 func getEvents(context *gin.Context) {
@@ -91,11 +92,20 @@ func updateEvent(context *gin.Context) {
 		return
 	}
 
-	_, err = models.GetEventByID(eventId)
+	userID := context.GetInt64("userID")
+	event, err := models.GetEventByID(eventId)
+
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Could not retrieve event.",
 			"error":   err.Error(),
+		})
+		return
+	}
+
+	if event.UserID != userID {
+		context.JSON(http.StatusUnauthorized, gin.H{
+			"message": "You are not authorized to update this event.",
 		})
 		return
 	}
@@ -135,7 +145,7 @@ func deleteEvent(context *gin.Context) {
 		})
 		return
 	}
-
+userID := context.GetInt64("userID")
 	event, err := models.GetEventByID(eventId)
 
 	if err != nil {
@@ -146,7 +156,16 @@ func deleteEvent(context *gin.Context) {
 		return
 	}
 
+	
+	if event.UserID != userID {
+		context.JSON(http.StatusUnauthorized, gin.H{
+			"message": "You are not authorized to delete this event.",
+		})
+		return
+	}
+
 	err = event.Delete(eventId)
+
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Could not delete event.",
@@ -159,3 +178,5 @@ func deleteEvent(context *gin.Context) {
 		"message": "Event deleted successfully.",
 	})
 }
+
+

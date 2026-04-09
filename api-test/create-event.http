@@ -1,10 +1,10 @@
 POST http://localhost:8080/events
 Content-Type: application/json
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RfbWVAZXhhbXBsZS5jb20iLCJleHAiOjE3NzU2OTI0ODIsInVzZXJJRCI6Mn0.WstdP6S1xdg05ffoI01Psr2S-zqs87CxecQ9FTIV77U
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzc1NzM4NjY5LCJ1c2VySUQiOjJ9.7jPWAqjEPRRbdj32zWoSfWHWKTohGPgrNMNj8cX0m0E
 
 {
-    "name": "Test Event 3",
-    "description": "Another test Event",
-    "location": "Different Test Location",
+    "name": "Test Event 1",
+    "description": "Event 1 Event",
+    "location": "Different Test 1 Location",
     "dateTime": "2024-10-15T14:00:00Z"
 }

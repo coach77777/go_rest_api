@@ -1,10 +1,11 @@
-PUT http://localhost:8080/events/1
+PUT http://localhost:8080/events/2
 Content-Type: application/json
-
-{
-        "name": "Updated Test Event",
-        "description": "Updated description for Test Event",
-        "location": "Updated Test Location",
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QzQGV4YW1wbGUuY29tIiwiZXhwIjoxNzc1NzI5ODYyLCJ1c2VySUQiOjd9._7ZeRycl_eJOqf-pHmFt3WwPJn-EXHEaXOJnn1nJDoI
+  
+  {
+        "name": "Updated Test Event2",
+        "description": "Updated description for Test Event2",
+        "location": "Updated Test Location2",
         "dateTime": "2024-10-20T14:00:00Z"
 
 }
