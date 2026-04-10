@@ -1,8 +1,10 @@
 package routes
 
-import(
+import (
 	"net/http"
 	"strconv"
+
+	"example.com/rest-api/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,7 +12,7 @@ import(
 
 func registerForEvent(context *gin.Context) {
 
-userID := context.GetString("userID")
+userID := context.GetInt64("userID")
 eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{

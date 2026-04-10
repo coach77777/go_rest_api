@@ -106,6 +106,7 @@ func (event Event) Delete(id int64) error {
 	}
 	defer stmt.Close()
 
+	
 	_, err = stmt.Exec(event.ID)
 	if err != nil {
 		return err
@@ -115,7 +116,7 @@ func (event Event) Delete(id int64) error {
 }
 
 func (event Event) Register(userID int64) error {
-	query := `INSERT INTO event_registrations (event_id, user_id) VALUES (?, ?)`
+	query := `INSERT INTO registrations (event_id, user_id) VALUES (?, ?)`
 
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
