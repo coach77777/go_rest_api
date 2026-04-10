@@ -48,7 +48,29 @@ context.JSON(http.StatusOK, gin.H{
 }
 
 
+func cancelRegistration(context *gin.Context){
+
+userID := context.GetInt64("userID")
+eventId, err := strconv.ParseInt(context.Param("id"), 10, 64)
+
+var event models.Event
+event.ID =eventId
+
+event.CancelRegistration(userID)
+
+if err != nil {
+	context.JSON(http.StatusInternalServerError, gin.H{
+		"message": "Failed to Cancel Registration.",
+		"error":   err.Error(),
+	})
+	return
+}
+
+context.JSON(http.StatusOK, gin.H{
+	"message": "Successfully canceled registration.",
+})
 
 
 
-func cancelRegistration(context *gin.Context){}
+
+}
